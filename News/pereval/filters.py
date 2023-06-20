@@ -1,6 +1,7 @@
 from .models import Pereval
 from django_filters import rest_framework as filters
 
+# не пойму!
 
 class PerevalFilter(filters.FilterSet):
     user__email = filters.CharFilter(field_name='user__email')
