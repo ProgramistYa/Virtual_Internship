@@ -1,4 +1,7 @@
-from django.urls import path, include
-from rest_framework import routers
+from django.urls import path
+from .views import PerevalList, submit_data
 
-router = routers.SimpleRouter()
+urlpatterns = [
+    path('submitData/', PerevalList.as_view(), name='pereval_list'),
+    path('submitData/create/', submit_data, name='submit_data'),
+]

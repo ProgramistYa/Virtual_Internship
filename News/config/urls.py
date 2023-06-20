@@ -1,12 +1,32 @@
 from django.contrib import admin
 from django.urls import path, include
 from django.views.generic import TemplateView
+from rest_framework import routers
+from pereval.views import *
+from rest_framework.schemas import get_schema_view
+
+from django.conf import settings
+from django.conf.urls.static import static
+
+
+router = routers.SimpleRouter()
+router.register('pereval', PerevalViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    #path('', include('pereval.urls')),
+    path('', include('pereval.urls')),
     path('swagger-ui/', TemplateView.as_view(
         template_name='swagger-ui.html',
         extra_context={'schema_url': 'openapi-schema'}
     ), name='swagger-ui'),
+    path('openapi/', get_schema_view(
+        title="Pereval",
+        description="API",
+        version="0.1",
+    ), name='openapi-schema'),
+    path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 ]
+
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
