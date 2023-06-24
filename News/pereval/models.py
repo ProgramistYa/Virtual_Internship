@@ -2,6 +2,12 @@ from django.db import models
 
 
 class User(models.Model):
+    """
+    Класс модели для пользователей. Поля модели:
+    email - уникальный адрес электронной почты;
+    otc - отчество;
+    phone - номер телефона.
+    """
     email = models.CharField(max_length=255)
     phone = models.CharField(max_length=12)
     first_name = models.CharField(max_length=255)
@@ -17,6 +23,13 @@ class User(models.Model):
 
 
 class Coords(models.Model):
+    """
+    Класс модели для координат перевала.
+    Поля модели:
+    latitude - географическая широта;
+    longitude - географическая долгота;
+    height - высота над уровнем моря
+    """
     latitude = models.FloatField(blank=True, null=True)
     longtitude = models.FloatField(blank=True, null=True)
     height = models.IntegerField(blank=True, null=True)
@@ -38,6 +51,14 @@ class Level(models.Model):
 
 
 class Image(models.Model):
+    """
+    Класс модели для загружаемых картинок(фотографий перевалов):
+    Поля модели:
+    title - Название фотографии;
+    image - фото перевала (в виде необработанных двоичных данных);
+    date_added - время добавления фото.
+    pereval - перевал, который сфотографировали (связан с моделью PerevalAdd);
+    """
     title = models.TextField(blank=True, null=True)
     date_added = models.DateTimeField(blank=True, null=True, auto_now_add=True)
     image = models.ImageField(upload_to='media/', null=True, blank=True)

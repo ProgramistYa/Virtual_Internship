@@ -1,3 +1,8 @@
+"""
+Сериализаторы позволяют преобразовывать сложные данные, такие как наборы запросов и экземпляры модели,
+в собственные типы данных Python, которые затем могут быть легко преобразованы
+в JSON, XML или другие типы контента.
+"""
 from .models import *
 from rest_framework import serializers
 from drf_writable_nested.serializers import WritableNestedModelSerializer
@@ -48,3 +53,10 @@ class PerevalSerializer(WritableNestedModelSerializer):
             'pk', 'status', 'beauty_title', 'title', 'other_titles',
             'connect', 'user', 'coord', 'level', 'images'
         ]
+
+
+class AuthEmailPerevalSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Pereval
+        depth = 1
+        fields = '__all__'
