@@ -1,12 +1,12 @@
 from rest_framework.decorators import api_view
-from rest_framework.exceptions import ValidationError
 from rest_framework.response import Response
-from rest_framework.generics import ListAPIView, RetrieveUpdateAPIView
+from rest_framework.generics import ListAPIView
 from rest_framework import generics, viewsets, mixins
 from django.core.exceptions import ObjectDoesNotExist
 from rest_framework import status
 
 from .serializers import *
+from .filters import PerevalFilter
 from .models import *
 
 
@@ -24,6 +24,7 @@ class ImageViewSet(viewsets.ModelViewSet):
 class PerevalList(ListAPIView):
     queryset = Pereval.objects.all()
     serializer_class = PerevalSerializer
+    filterset_class = PerevalFilter
 
 
 class AuthEmailPerevalAPI(mixins.ListModelMixin, viewsets.GenericViewSet):

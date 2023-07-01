@@ -59,4 +59,5 @@ class AuthEmailPerevalSerializer(serializers.ModelSerializer):
     class Meta:
         model = Pereval
         depth = 1
+        # depyh  указывающее глубину взаимосвязей, которые должны быть пройдены перед возвратом к плоскому представлению.
         fields = '__all__'
